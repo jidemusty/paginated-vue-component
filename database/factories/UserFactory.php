@@ -23,3 +23,12 @@ $factory->define(App\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Topic::class, function (Faker $faker) {
+
+    return [
+        'title' => $faker->sentence,
+    ];
+});
+
+
