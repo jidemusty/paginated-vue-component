@@ -18,6 +18,7 @@ window.Vue = require('vue');
 Vue.component('topics', require('./components/Topics.vue'));
 Vue.component('topic', require('./components/Topic.vue'));
 Vue.component('pages', require('./components/Pages.vue'));
+Vue.component('users', require('./components/Users.vue'));
 
 const app = new Vue({
     el: '#app'

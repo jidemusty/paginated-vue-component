@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Example Component</div>
+                    <div class="panel-heading">Topics</div>
 
                     <div class="panel-body">
                         <pages v-if="meta && topics.length" :pagination="meta.pagination"></pages>
