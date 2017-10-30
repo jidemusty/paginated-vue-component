@@ -6,7 +6,7 @@
                     <div class="panel-heading">Topics</div>
 
                     <div class="panel-body">
-                        <pages v-if="meta && topics.length" :pagination="meta.pagination"></pages>
+                        <pages v-if="meta && topics.length" for="topics" :pagination="meta.pagination"></pages>
                         <topic v-for="topic in topics" :topic="topic" :key="topic.id"></topic>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
         mounted() {
             this.getTopics(1)
 
-            eventHub.$on('switched-page', this.getTopics)
+            eventHub.$on('topics.switched-page', this.getTopics)
         }
     }
 </script>

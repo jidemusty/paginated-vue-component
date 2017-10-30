@@ -6,7 +6,7 @@
                     <div class="panel-heading">Users</div>
 
                     <div class="panel-body">
-                        <pages v-if="meta && users.length" :pagination="meta.pagination"></pages>
+                        <pages v-if="meta && users.length" for="users" :pagination="meta.pagination"></pages>
                         <div class="media" v-for="user in users">
                             <div class="media-left">
                                 <a href="#">
@@ -46,7 +46,7 @@
         mounted() {
             this.getUsers(1)
 
-            eventHub.$on('switched-page', this.getUsers)
+            eventHub.$on('users.switched-page', this.getUsers)
         }
     }
 </script>

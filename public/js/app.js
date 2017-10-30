@@ -42721,7 +42721,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         this.getTopics(1);
 
-        __WEBPACK_IMPORTED_MODULE_1__events___default.a.$on('switched-page', this.getTopics);
+        __WEBPACK_IMPORTED_MODULE_1__events___default.a.$on('topics.switched-page', this.getTopics);
     }
 });
 
@@ -42744,7 +42744,9 @@ var render = function() {
             { staticClass: "panel-body" },
             [
               _vm.meta && _vm.topics.length
-                ? _c("pages", { attrs: { pagination: _vm.meta.pagination } })
+                ? _c("pages", {
+                    attrs: { for: "topics", pagination: _vm.meta.pagination }
+                  })
                 : _vm._e(),
               _vm._v(" "),
               _vm._l(_vm.topics, function(topic) {
@@ -43358,14 +43360,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['pagination'],
+    props: {
+        pagination: Object,
+        for: {
+            type: String,
+            default: 'default'
+        }
+    },
     methods: {
         switchPage: function switchPage(page) {
             if (page < 1 || page > this.pagination.total_pages) {
                 return;
             }
 
-            __WEBPACK_IMPORTED_MODULE_0__events___default.a.$emit('switched-page', page);
+            __WEBPACK_IMPORTED_MODULE_0__events___default.a.$emit(this.for + '.switched-page', page);
         }
     }
 });
@@ -43594,7 +43602,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         this.getUsers(1);
 
-        __WEBPACK_IMPORTED_MODULE_1__events___default.a.$on('switched-page', this.getUsers);
+        __WEBPACK_IMPORTED_MODULE_1__events___default.a.$on('users.switched-page', this.getUsers);
     }
 });
 
@@ -43617,7 +43625,9 @@ var render = function() {
             { staticClass: "panel-body" },
             [
               _vm.meta && _vm.users.length
-                ? _c("pages", { attrs: { pagination: _vm.meta.pagination } })
+                ? _c("pages", {
+                    attrs: { for: "users", pagination: _vm.meta.pagination }
+                  })
                 : _vm._e(),
               _vm._v(" "),
               _vm._l(_vm.users, function(user) {

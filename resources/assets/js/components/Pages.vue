@@ -29,14 +29,20 @@
     import eventHub from '../events';
 
     export default {
-        props: ['pagination'],
+        props: {
+            pagination: Object,
+            for: {
+                type: String,
+                default: 'default'
+            }
+        },
         methods: {
             switchPage (page) {
                 if (page < 1 || page > this.pagination.total_pages) {
                     return
                 }
 
-                eventHub.$emit('switched-page', page)
+                eventHub.$emit(this.for + '.switched-page', page)
             }
         }
     }
