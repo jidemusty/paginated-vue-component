@@ -6,6 +6,7 @@
                     <div class="panel-heading">Example Component</div>
 
                     <div class="panel-body">
+                        <pages :pagination="meta.pagination"></pages>
                         <topic v-for="topic in topics" :topic="topic" :key="topic.id"></topic>
                     </div>
                 </div>
