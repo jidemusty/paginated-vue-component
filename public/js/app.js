@@ -42676,6 +42676,8 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__events__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__events___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__events__);
 //
 //
 //
@@ -42693,6 +42695,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -42716,6 +42719,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.getTopics(1);
+
+        __WEBPACK_IMPORTED_MODULE_1__events___default.a.$on('switched-page', this.getTopics);
     }
 });
 
@@ -42739,7 +42744,9 @@ var render = function() {
             "div",
             { staticClass: "panel-body" },
             [
-              _c("pages", { attrs: { pagination: _vm.meta.pagination } }),
+              _vm.meta && _vm.topics.length
+                ? _c("pages", { attrs: { pagination: _vm.meta.pagination } })
+                : _vm._e(),
               _vm._v(" "),
               _vm._l(_vm.topics, function(topic) {
                 return _c("topic", { key: topic.id, attrs: { topic: topic } })
@@ -43319,6 +43326,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__events__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__events___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__events__);
 //
 //
 //
@@ -43347,10 +43356,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['pagination'],
     methods: {
-        switchPage: function switchPage(page) {}
+        switchPage: function switchPage(page) {
+            if (page < 1 || page > this.pagination.total_pages) {
+                return;
+            }
+
+            __WEBPACK_IMPORTED_MODULE_0__events___default.a.$emit('switched-page', page);
+        }
     }
 });
 
@@ -43373,7 +43390,26 @@ var render = function() {
             staticClass: "page-item",
             class: { disabled: !_vm.pagination.links.previous }
           },
-          [_vm._m(0)]
+          [
+            _c(
+              "a",
+              {
+                staticClass: "page-link",
+                attrs: { href: "#", "aria-label": "Previous" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.switchPage(_vm.pagination.current_page - 1)
+                  }
+                }
+              },
+              [
+                _c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("«")]),
+                _vm._v(" "),
+                _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
+              ]
+            )
+          ]
         ),
         _vm._v(" "),
         _vm._l(parseInt(_vm.pagination.total_pages), function(page) {
@@ -43408,46 +43444,33 @@ var render = function() {
             staticClass: "page-item",
             class: { disabled: !_vm.pagination.links.next }
           },
-          [_vm._m(1)]
+          [
+            _c(
+              "a",
+              {
+                staticClass: "page-link",
+                attrs: { href: "#", "aria-label": "Next" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.switchPage(_vm.pagination.current_page + 1)
+                  }
+                }
+              },
+              [
+                _c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("»")]),
+                _vm._v(" "),
+                _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
+              ]
+            )
+          ]
         )
       ],
       2
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "page-link",
-        attrs: { href: "#", "aria-label": "Previous" }
-      },
-      [
-        _c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("«")]),
-        _vm._v(" "),
-        _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "page-link", attrs: { href: "#", "aria-label": "Next" } },
-      [
-        _c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("»")]),
-        _vm._v(" "),
-        _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -43456,6 +43479,12 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-bdaeb102", module.exports)
   }
 }
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports) {
+
+module.exports = new Vue();
 
 /***/ })
 /******/ ]);

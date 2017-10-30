@@ -6,7 +6,7 @@
                     <div class="panel-heading">Example Component</div>
 
                     <div class="panel-body">
-                        <pages :pagination="meta.pagination"></pages>
+                        <pages v-if="meta && topics.length" :pagination="meta.pagination"></pages>
                         <topic v-for="topic in topics" :topic="topic" :key="topic.id"></topic>
                     </div>
                 </div>
@@ -17,6 +17,7 @@
 
 <script>
     import axios from 'axios';
+    import eventHub from '../events';
 
     export default {
         data () {
@@ -35,6 +36,8 @@
         },
         mounted() {
             this.getTopics(1)
+
+            eventHub.$on('switched-page', this.getTopics)
         }
     }
 </script>
