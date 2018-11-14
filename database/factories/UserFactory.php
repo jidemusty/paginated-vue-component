@@ -1,6 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,8 @@ $factory->define(App\User::class, function (Faker $faker) {
 $factory->define(App\Topic::class, function (Faker $faker) {
 
     return [
-        'title' => $faker->sentence,
+        'user_id' => User::all()->random()->id,
+        'title' => $faker->sentence
     ];
 });
 
