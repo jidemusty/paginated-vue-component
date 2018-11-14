@@ -28,7 +28,7 @@
         },
         methods: {
             getTopics (page) {
-            axios.get('/topics?page=' + page).then((res) => {
+                axios.get('/topics?page=' + page).then((res) => {
                     this.topics = res.data.data;
                     this.meta = res.data.meta;
                 })
